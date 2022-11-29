@@ -25,10 +25,12 @@ export class Ovni extends SpaceCraft{
     else
     {
       this.left=true;
-      let y=2;
-      if(this.y+y<=document.documentElement.clientHeight-this.height)
+      if(this.y+70<=document.documentElement.clientHeight-this.height)
       {
-      this.y += y;
+      this.y += 70;
+      }
+      else{
+        return false;
       }
     }
     
@@ -36,7 +38,16 @@ export class Ovni extends SpaceCraft{
     {
       this.left=false;
       this.x=0;
+      if(this.y+70<=document.documentElement.clientHeight-this.height)
+      {
+      this.y += 70;
+      }
+      else
+      {
+        return false;
+      }
     }
+    return true;
   }
 
   hit(rocket)

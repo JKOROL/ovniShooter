@@ -24,3 +24,12 @@ video{
     font-size: 3em;
     font-weight: bold;
 }
+
+#Mort{
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    color: White;
+    font-size: 3em;
+    font-weight: bold;
+}

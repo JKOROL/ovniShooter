@@ -3,12 +3,13 @@ import { Ovni } from "./ovni/ovni.js";
 import { SpaceShip } from "./space-ship/space-ship.js";
 
 let score=0;
-let speed=10;
+let speed=60;
 
 let spaceShipDiv = document.getElementById("SpaceShip");
 let ovniDiv = document.getElementById("Ovni");
 let missilesDiv = document.getElementById("Missiles");
 let scoreDiv = document.getElementById("Score");
+let mortDiv = document.getElementById("Mort");
 
 let spaceShip = new SpaceShip(250,500);
 
@@ -54,16 +55,23 @@ window.setInterval(function(){
 
   
 let ovniIntervalMove = window.setInterval(function(){
-    
-    ovni.move(speed);
-  }, 60);
+    if(!ovni.move(10))
+    {
+      window.clearInterval(ovniIntervalMove);
+      window.clearInterval(rocketsInterval);
+      window.clearInterval(drawInterval);
+      spaceShipDiv.innerHTML="";
+      ovniDiv.innerHTML="";
+      mortDiv.innerText="T'es mort ! T'es vraiment à chier !";
+    }
+  }, speed);
 
-  window.setInterval(function(){
+  let rocketsInterval = window.setInterval(function(){
     if(spaceShip.moveRockets(ovni))
     {
         spaceShip.resetRockets();
         score+=100;
-        speed=speed*1.2;
+        speed=speed*0.8;
         //console.log(speed);
         window.clearInterval(ovniIntervalMove);
         setTimeout(()=>{
@@ -71,8 +79,16 @@ let ovniIntervalMove = window.setInterval(function(){
             ovni.setCoordinates(-500,-500);
             ovniIntervalMove = window.setInterval(function(){
     
-                ovni.move(speed);
-              }, 60);
+              if(!ovni.move(10))
+              {
+                window.clearInterval(ovniIntervalMove);
+                window.clearInterval(rocketsInterval);
+                window.clearInterval(drawInterval);
+                spaceShipDiv.innerHTML="";
+                ovniDiv.innerHTML="";
+                mortDiv.innerText="T'es mort ! T'es vraiment nul !";
+              }
+              }, speed);
               ovni = new Ovni();
             ovniDiv.innerHTML="";
         },500)
@@ -80,7 +96,7 @@ let ovniIntervalMove = window.setInterval(function(){
     };
   }, 60);
 
-window.setInterval(function(){
+let drawInterval= window.setInterval(function(){
     spaceShipDiv.innerHTML="";
     spaceShipDiv.appendChild(spaceShip.draw());
     ovniDiv.innerHTML="";
