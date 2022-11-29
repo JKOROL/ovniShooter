@@ -1,0 +1,26 @@
+body{
+    height: 100%;
+    width: 100%;
+    /* background-image: url("assets/univers.jpg"); */
+}
+
+img{
+    transition: top 2s, left 2s, transform 2s;
+}
+
+video{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#ScoreHolder{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: White;
+    font-size: 3em;
+    font-weight: bold;
+}
